@@ -16,6 +16,10 @@ snake[0] = {
 }
 
 let direction = "left";
+let food = {
+    x: Math.floor(Math.random() * 15 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 1) * box
+}
 
 // Função para criar o canvas de fato:
 function criarBG(){
@@ -34,7 +38,13 @@ function criarCobrinha() {
     }
 }
 
-// TODO: adicionar limites (ficar sempre no canvas):
+// TODO: adicionar comida
+function drawFood() {
+        context.fillStyle = "red";
+        context.fillRect(food.x, food.y, box, box);
+}
+
+
 document.addEventListener('keydown', update);
 
 function update(event) {
@@ -59,6 +69,7 @@ function iniciarJogo(){
 
     criarBG();
     criarCobrinha();
+    drawFood();
 
     // Movimentos da cobrinha:
     let snakeX = snake[0].x;
