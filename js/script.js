@@ -32,5 +32,36 @@ function criarCobrinha() {
     }
 }
 
-criarBG();
-criarCobrinha();
+// função para iniciar o jogo
+function iniciarJogo(){
+    criarBG();
+    criarCobrinha();
+
+    // Movimentos da cobrinha:
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    // cada vez que a cobrinha se movimenta, adicionamos um elemento no final e retiramos o do começo
+    if(direction == "right") snakeX += box;
+    if(direction == "left") snakeX -= box;
+    if(direction == "up") snakeY += box;
+    if(direction == "down") snakeY -= box;
+
+    // remove o último: 
+    snake.pop();
+
+    // Adiciona no começo:
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
+    
+
+}
+
+let jogo = setInterval(iniciarJogo, 100);
+let direction = "left";
+
+// TODO: adicionar limites (ficar sempre no canvas):
