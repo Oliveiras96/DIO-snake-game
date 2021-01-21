@@ -66,6 +66,19 @@ function iniciarJogo(){
     if (snake[0].y >= 15 * box && direction == "up") snake[0].y = 0;
     if (snake[0].y < 0 && direction == "down") snake[0].y = 16 * box;
 
+    // TODO: Game Over se se chocar com o próprio corpo
+    let cabeca = {
+        x: snake[0].x,
+        y: snake[0].y
+    }
+
+    for(i = 1; i < snake.length; i++){
+        if (cabeca.x == snake[i].x && cabeca.y == snake[i].y) {
+            clearInterval(jogo);
+            alert("Game Over :(");
+        }
+    }
+
     criarBG();
     criarCobrinha();
     drawFood();
@@ -90,8 +103,6 @@ function iniciarJogo(){
             y: Math.floor(Math.random() * 15 + 1) * box
         }
     }
-
-    // TODO: Game Over se se chocar com o próprio corpo
     
     // Adiciona no começo:
     let newHead = {
