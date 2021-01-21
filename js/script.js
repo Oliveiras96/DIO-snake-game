@@ -15,6 +15,8 @@ snake[0] = {
     y: 8 * box
 }
 
+let direction = "left";
+
 // Função para criar o canvas de fato:
 function criarBG(){
     context.fillStyle = "lightgreen";
@@ -32,8 +34,29 @@ function criarCobrinha() {
     }
 }
 
+// TODO: adicionar limites (ficar sempre no canvas):
+document.addEventListener('keydown', update);
+
+function update(event) {
+    // 37 Para esquerda
+    if (event.keyCode == 37 && direction != "right" ) direction = "left";
+    // 38 Para cima
+    if (event.keyCode == 40 && direction != "down" ) direction = "up";
+    // 39 para direita
+    if (event.keyCode == 39 && direction != "left" ) direction = "right";
+    // 40 para baixo
+    if (event.keyCode == 38 && direction != "up" ) direction = "down";
+}
+
 // função para iniciar o jogo
 function iniciarJogo(){
+
+    // Cobrinha deve ficar dentro do canvas:
+    if (snake[0].x >= 15 * box && direction == "right") snake[0].x = 0;
+    if (snake[0].x < 0 && direction == "left") snake[0].x = 15 * box;
+    if (snake[0].y >= 15 * box && direction == "up") snake[0].y = 0;
+    if (snake[0].y < 0 && direction == "down") snake[0].y = 15 * box;
+
     criarBG();
     criarCobrinha();
 
@@ -61,7 +84,8 @@ function iniciarJogo(){
 
 }
 
-let jogo = setInterval(iniciarJogo, 100);
-let direction = "left";
 
-// TODO: adicionar limites (ficar sempre no canvas):
+
+let jogo = setInterval(iniciarJogo, 100);
+
+
