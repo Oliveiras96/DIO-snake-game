@@ -38,7 +38,6 @@ function criarCobrinha() {
     }
 }
 
-// TODO: adicionar comida
 function drawFood() {
         context.fillStyle = "red";
         context.fillRect(food.x, food.y, box, box);
@@ -63,9 +62,9 @@ function iniciarJogo(){
 
     // Cobrinha deve ficar dentro do canvas:
     if (snake[0].x >= 15 * box && direction == "right") snake[0].x = 0;
-    if (snake[0].x < 0 && direction == "left") snake[0].x = 15 * box;
+    if (snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
     if (snake[0].y >= 15 * box && direction == "up") snake[0].y = 0;
-    if (snake[0].y < 0 && direction == "down") snake[0].y = 15 * box;
+    if (snake[0].y < 0 && direction == "down") snake[0].y = 16 * box;
 
     criarBG();
     criarCobrinha();
@@ -81,9 +80,19 @@ function iniciarJogo(){
     if(direction == "up") snakeY += box;
     if(direction == "down") snakeY -= box;
 
-    // remove o último: 
-    snake.pop();
+    // aumenta de tamanho ao comer
+    if (snakeX != food.x || snakeY != food.y) {
+        // remove o último: 
+        snake.pop();
+    } else {
+        food = {
+            x: Math.floor(Math.random() * 15 + 1) * box,
+            y: Math.floor(Math.random() * 15 + 1) * box
+        }
+    }
 
+    // TODO: Game Over se se chocar com o próprio corpo
+    
     // Adiciona no começo:
     let newHead = {
         x: snakeX,
