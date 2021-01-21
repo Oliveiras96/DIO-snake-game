@@ -1,4 +1,3 @@
-// TODO: Criar o canvas
 
 // obter o elemento correspondente ao canvas
 let canvas = document.getElementById("snake");
@@ -16,3 +15,5 @@ function criarBG(){
 }
 
 criarBG();
+
+// TODO: Criar cobrinha
